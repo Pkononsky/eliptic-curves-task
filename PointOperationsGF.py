@@ -30,9 +30,9 @@ class PointOperationsGF(PointOperations):
             args[0] - is_nn
         """
         if not PointOperationsGF.is_point_belong(curve, point1):
-            raise Exception(f"Точка ({point1.x}, {point1.y}) не принадлежит кривой")
+            return f"Точка ({point1.x}, {point1.y}) не принадлежит кривой"
         elif not PointOperationsGF.is_point_belong(curve, point2):
-            raise Exception(f"Точка ({point2.x}, {point2.y}) не принадлежит кривой")
+            return f"Точка ({point2.x}, {point2.y}) не принадлежит кривой"
         else:
             if args[0]:
                 return PointOperationsGF._points_sum_nn(curve, point1, point2)
@@ -101,7 +101,7 @@ class PointOperationsGF(PointOperations):
     @staticmethod
     def _points_mul(curve: EllipticCurveGF, point: Point, mul: int, func):
         if not PointOperationsGF.is_point_belong(curve, point):
-            raise Exception(f"Точка ({point.x}, {point.y}) не принадлежит кривой")
+            return f"Точка ({point.x}, {point.y}) не принадлежит кривой"
 
         res_point = point
 

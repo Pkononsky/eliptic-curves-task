@@ -28,9 +28,9 @@ class PointOperationsZp(PointOperations):
     @staticmethod
     def points_sum(curve: EllipticCurve, point1: Point, point2: Point):
         if not PointOperationsZp.is_point_belong(curve, point1):
-            raise Exception(f"Точка ({point1.x}, {point1.y}) не принадлежит кривой")
+            return f"Точка ({point1.x}, {point1.y}) не принадлежит кривой"
         elif not PointOperationsZp.is_point_belong(curve, point2):
-            raise Exception(f"Точка ({point2.x}, {point2.y}) не принадлежит кривой")
+            return f"Точка ({point2.x}, {point2.y}) не принадлежит кривой"
         else:
             return PointOperationsZp._points_sum(curve, point1, point2)
 
@@ -60,7 +60,7 @@ class PointOperationsZp(PointOperations):
     @staticmethod
     def points_mul(curve: EllipticCurve, point: Point, mul: int):
         if not PointOperationsZp.is_point_belong(curve, point):
-            raise Exception(f"Точка ({point.x}, {point.y}) не принадлежит кривой")
+            return f"Точка ({point.x}, {point.y}) не принадлежит кривой"
 
         res_point = point
 
