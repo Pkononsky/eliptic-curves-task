@@ -75,14 +75,18 @@ def compute_in_gf(lines, res):
             point1 = Point(Polynomial(parse_str_with_base(point1_str[0])), Polynomial(parse_str_with_base(point1_str[1])))
             point2 = Point(Polynomial(parse_str_with_base(point2_str[0])), Polynomial(parse_str_with_base(point2_str[1])))
 
-            res.write(f'{line} = {PointOperationsGF.points_sum(curve, point1, point2, is_nn).to_string(True)}\n')
+            result = PointOperationsGF.points_sum(curve, point1, point2, is_nn)
+
+            res.write(f'{line} = {result.to_string(True) if result is Point else result}\n')
         elif operation.lower() == 'm':
             point1_str = split[1].replace('(', '').replace(',', ' ').replace(')', '').split(' ')
             mul = int(split[2])
 
             point1 = Point(Polynomial(parse_str_with_base(point1_str[0])), Polynomial(parse_str_with_base(point1_str[1])))
 
-            res.write(f'{line} = {PointOperationsGF.points_mul(curve, point1, mul, is_nn).to_string(True)}\n')
+            result = PointOperationsGF.points_mul(curve, point1, mul, is_nn)
+
+            res.write(f'{line} = {result.to_string(True) if result is Point else result}\n')
 
 def main():
     files = [f for f in listdir('tests') if isfile(join('tests', f))]
@@ -93,13 +97,10 @@ def main():
             with open(f'tests\\{file}', mode='r+') as f:
                 lines = f.readlines()
 
-                try:
-                    if lines[0].startswith('ZP'):
-                        compute_in_zp(lines, res)
-                    if lines[0].startswith('GF2'):
-                        compute_in_gf(lines, res)
-                except:
-                    res.write('Ошибка при выполнении\n')
+                if lines[0].startswith('ZP'):
+                    compute_in_zp(lines, res)
+                if lines[0].startswith('GF2'):
+                    compute_in_gf(lines, res)
 
                 res.write('\n\n')
 
