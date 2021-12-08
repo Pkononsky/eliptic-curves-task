@@ -63,7 +63,7 @@ def compute_in_gf(lines, res):
 
     is_nn = lines[0].startswith('GF2NN')
 
-    for line in lines[4:]:
+    for line in lines[5:]:
         line = line.replace('\n', '')
         split = line.split(' ')
         operation = split[0]
