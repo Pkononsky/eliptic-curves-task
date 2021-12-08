@@ -93,11 +93,13 @@ def main():
             with open(f'tests\\{file}', mode='r+') as f:
                 lines = f.readlines()
 
-
-                if lines[0].startswith('ZP'):
-                    compute_in_zp(lines, res)
-                if lines[0].startswith('GF2'):
-                    compute_in_gf(lines, res)
+                try:
+                    if lines[0].startswith('ZP'):
+                        compute_in_zp(lines, res)
+                    if lines[0].startswith('GF2'):
+                        compute_in_gf(lines, res)
+                except:
+                    res.write('Ошибка при выполнении\n')
 
                 res.write('\n\n')
 
